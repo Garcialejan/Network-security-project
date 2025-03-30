@@ -1,0 +1,15 @@
+pandas
+mlflow
+numpy
+scikit-learn
+matplotlib
+seaborn
+python-box
+pyYAML
+tqdm
+ensure
+joblib
+types-PyYAML
+fastapi
+python-dotenv
+pymongo
