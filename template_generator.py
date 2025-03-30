@@ -20,7 +20,7 @@ list_of_files = [
     f"{project_name}/entity/config_entity.py", 
     f"{project_name}/constants/__init__.py",
     f"{project_name}/cloud/__init__.py"
-    "Network_Data/", 
+    "Network_Data/",
     "notebooks/",
     "main.py",
     "Dockerfile",

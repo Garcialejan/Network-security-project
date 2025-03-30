@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: NetworkSecurity
+Version: 0.0.1
+Author: Alejandro García
+Author-email: garcialejan@gmail.com
+Requires-Dist: python-dotenv
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: pymongo[srv]
+Requires-Dist: certifi
+Requires-Dist: ensure
+Requires-Dist: python-box
+Requires-Dist: pyYAML
+Requires-Dist: scikit-learn
+Requires-Dist: mlflow
+Requires-Dist: pyaml
+Requires-Dist: dagshub
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Requires-Dist: python-multipart
