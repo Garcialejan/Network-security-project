@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.2
 Name: NetworkSecurity
 Version: 0.0.1
 Author: Alejandro García
@@ -8,6 +8,7 @@ Requires-Dist: pandas
 Requires-Dist: numpy
 Requires-Dist: matplotlib
 Requires-Dist: pymongo[srv]
+Requires-Dist: pymongo
 Requires-Dist: certifi
 Requires-Dist: ensure
 Requires-Dist: python-box
@@ -19,3 +20,6 @@ Requires-Dist: dagshub
 Requires-Dist: fastapi
 Requires-Dist: uvicorn
 Requires-Dist: python-multipart
+Dynamic: author
+Dynamic: author-email
+Dynamic: requires-dist

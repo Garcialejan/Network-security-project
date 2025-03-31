@@ -3,6 +3,7 @@ pandas
 numpy
 matplotlib
 pymongo[srv]
+pymongo
 certifi
 ensure
 python-box
