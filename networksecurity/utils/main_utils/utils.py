@@ -1,4 +1,4 @@
-import os
+import os,sys
 import yaml
 from networksecurity.logging.logger import logger
 import json
@@ -10,6 +10,8 @@ from typing import Any
 from ensure import ensure_annotations
 from box import ConfigBox
 from box.exceptions import BoxValueError
+
+from networksecurity.exception.exception import NetworkSecurityException
 
 # Ensure library is designed to simplify testing and validation 
 # of function arguments, return values, and other aspects. Provides
@@ -43,7 +45,17 @@ def read_yaml_file(path_to_yaml: Path) -> ConfigBox:
         raise ValueError("yaml file is empty")
     except Exception as e:
         raise e
-    
+
+def write_yaml_file(file_path: str, content: object, replace: bool = False) -> None:
+    try:
+        if replace:
+            if os.path.exists(file_path):
+                os.remove(file_path)
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        with open(file_path, "w") as file:
+            yaml.dump(content, file)
+    except Exception as e:
+        raise NetworkSecurityException(e, sys)
     
 @ensure_annotations
 def save_bin(data: Any, path: Path):

@@ -31,7 +31,6 @@ columns:
   - Statistical_report: int64
   - Result: int64
 
-
 numerical_columns:
   - having_IP_Address
   - URL_Length
