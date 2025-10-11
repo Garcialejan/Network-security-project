@@ -58,7 +58,6 @@ def write_yaml_file(file_path: str, content: object, replace: bool = False) -> N
     except Exception as e:
         raise NetworkSecurityException(e, sys)
     
-@ensure_annotations
 def save_numpy_array_data(file_path: str, array: np.array):
     """
     Save numpy array data to file
@@ -73,7 +72,6 @@ def save_numpy_array_data(file_path: str, array: np.array):
     except Exception as e:
         raise NetworkSecurityException(e, sys) from e
 
-@ensure_annotations
 def save_object(file_path: str, obj: object) -> None:
     try:
         logger.info("Entered the save_object method of MainUtils class")
