@@ -2,3 +2,8 @@ venv
 *.env
 *.pdf
 *.csv
+*/mlruns
+*/Artifacts
+*/final_models
+./main.py
+./push_data.py

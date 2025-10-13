@@ -27,6 +27,15 @@ import mlflow
 from mlflow.models import infer_signature
 from urllib.parse import urlparse
 
+
+import dagshub
+from dotenv import load_dotenv
+load_dotenv()
+dagshub.init(repo_owner='garcialejan', repo_name='Network-security-project', mlflow=True)
+# os.environ["MLFLOW_TRACKING_URI"] = os.getenv("MLFLOW_TRACKING_URI")
+# os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("MLFLOW_TRACKING_USERNAME")
+# os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("MLFLOW_TRACKING_PASSWORD")
+
 class ModelTrainer:
     def __init__(self,
                  model_trainer_config: ModelTrainerConfig,
@@ -39,7 +48,7 @@ class ModelTrainer:
             raise NetworkSecurityException(e, sys)
         
     def track_mlflow(self, best_model, classification_train_metric):
-        mlflow.set_tracking_uri("http://127.0.0.1:5000")
+        # mlflow.set_tracking_uri("http://127.0.0.1:5000")
         mlflow.set_experiment("Best model NetworkSecurity")
         
         with mlflow.start_run(run_name = "Best_model_params"):
@@ -175,8 +184,9 @@ class ModelTrainer:
 
         Network_Model = NetworkModel(preprocessor = preprocessor, model = best_model)
         save_object(self.model_trainer_config.trained_model_file_path,obj = NetworkModel)
+        
         # model pusher
-        save_object("final_model/model.pkl",best_model)
+        save_object("./final_models/model.pkl",best_model)
         
         ## Model Trainer Artifact
         model_trainer_artifact = ModelTrainerArtifact(
