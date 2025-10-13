@@ -7,3 +7,5 @@ venv
 */final_models
 ./main.py
 ./push_data.py
+__pycache__/
+*.pyc

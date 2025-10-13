@@ -12,11 +12,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi import FastAPI, File, UploadFile, Request
 from uvicorn import run as app_run
-from fastapi.responses import Response
-from starlette.responses import RedirectResponse
+from fastapi.responses import Response, RedirectResponse
 # RedirectResponse se utiliza para devolver una respuesta HTTP que redirige al cliente (navegador)
 # a otra URL. Esta clase genera una respuesta con: Código de estado HTTP típicamente 302 (Found) y
 # una cabecera Location que contiene la URL de destino.
+
+# La clase Response es genérica y flexible, para cualquier tipo de respuesta (tetxo plano, json, imágenes, ...).
+# La clase HTMLResponse es más especializada para HTML, más seguro y legible cuando devuelves páginas web.
 
 from networksecurity.exception.exception import NetworkSecurityException
 from networksecurity.logging.logger import logger
@@ -81,6 +83,27 @@ async def train_route():
         return Response("Training is successful")
     except Exception as e:
         raise NetworkSecurityException(e,sys)
+
+# Con response_class = Response se define el tipo de respuesta esperado
+@app.post("/predict", response_class = Response)
+async def predict_route(request: Request, file: UploadFile = File(...)):
+    try:
+        df = pd.read_csv(file.file)
+        #print(df)
+        preprocesor = load_object("./final_models/preprocessor.pkl")
+        final_model = load_object("./final_models/model.pkl")
+        network_model = NetworkModel(preprocessor = preprocesor, model = final_model)
+        print(df.iloc[0])
+        y_pred = network_model.predict(df)
+        df['predicted_column'] = y_pred
+        print(df['predicted_column'])
+        
+        df.to_csv('./prediction_output/output.csv')
+        table_html = df.to_html(classes='table table-striped')
+        #print(table_html)
+        return templates.TemplateResponse("table.html", {"request": request, "table": table_html})
+    except Exception as e:
+        raise NetworkSecurityException(e, sys)
     
 if __name__ == "__main__":
     app_run(app, host="127.0.0.1", port=8000)
