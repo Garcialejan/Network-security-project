@@ -2,10 +2,10 @@ venv
 *.env
 *.pdf
 *.csv
-*/mlruns
-*/Artifacts
-*/final_models
-./main.py
-./push_data.py
+**/mlruns
+**/Artifacts/
+**/final_models/
+**/main.py
+**/push_data.py
 __pycache__/
 *.pyc
