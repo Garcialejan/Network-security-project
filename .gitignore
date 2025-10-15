@@ -9,3 +9,4 @@ venv
 **/push_data.py
 __pycache__/
 *.pyc
+**/logs
