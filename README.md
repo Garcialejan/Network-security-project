@@ -22,10 +22,9 @@ Missing value imputation: KNNImputer is used to fill missing values while preser
  Before training, a rigorous validation pipeline ensures data quality and stability:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '14px' }}}%%
 graph TD
     A[Data Validation Config] --> B[Ingested Data]
-    B --> C{Schema Check<br><small>10 expected features</small>}
+    B --> C{Schema Check<br><small>31 expected features</small>}
     C --> D[Read Raw Data]
     D --> E{Column Count Valid?}
     E -->|Yes| F{Numerical Columns Present?}
@@ -45,16 +44,16 @@ graph TD
         O[Artifacts]
         P[Timestamp]
         Q[Validation Metadata]
-        R[report.json]
+        R[report.yml]
     end
 
     classDef warning fill:#fff8e1,stroke:#ff9800,color:#e65100,stroke-width:2px;
     classDef success fill:#e8f5e9,stroke:#4caf50,color:#1b5e20,stroke-width:2px;
     classDef error fill:#ffebee,stroke:#f44336,color:#b71c1c,stroke-width:2px;
 
-    class C,warning
-    class L,success
-    class N,error
+    class C, warning
+    class L, success
+    class N, error
 ```
 
 - Schema validation: checks column count and data types.

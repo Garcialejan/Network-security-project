@@ -31,10 +31,10 @@ from urllib.parse import urlparse
 import dagshub
 from dotenv import load_dotenv
 load_dotenv()
-dagshub.init(repo_owner='garcialejan', repo_name='Network-security-project', mlflow=True)
-# os.environ["MLFLOW_TRACKING_URI"] = os.getenv("MLFLOW_TRACKING_URI")
-# os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("MLFLOW_TRACKING_USERNAME")
-# os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("MLFLOW_TRACKING_PASSWORD")
+# dagshub.init(repo_owner='garcialejan', repo_name='Network-security-project', mlflow=True)
+tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
+os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("MLFLOW_TRACKING_USERNAME")
+os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("MLFLOW_TRACKING_PASSWORD")
 
 class ModelTrainer:
     def __init__(self,
@@ -48,7 +48,9 @@ class ModelTrainer:
             raise NetworkSecurityException(e, sys)
         
     def track_mlflow(self, best_model, classification_train_metric):
-        # mlflow.set_tracking_uri("http://127.0.0.1:5000")
+        mlflow.set_registry_uri(os.getenv(tracking_uri))
+        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+        
         mlflow.set_experiment("Best model NetworkSecurity")
         
         with mlflow.start_run(run_name = "Best_model_params"):
