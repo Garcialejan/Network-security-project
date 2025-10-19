@@ -6,8 +6,9 @@ RUN apt update -y && \
     apt install awscli -y --no-install-recommends awscli && \
     rm -rf /var/lib/apt/lists/*
     
-RUN apt-get update && pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && \
+    pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 8000
+EXPOSE 8080
 
 CMD ["python3", "app.py"]
